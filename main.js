@@ -18,7 +18,9 @@ const front = document.querySelectorAll(".front");
 const back = document.querySelectorAll(".back");
 let cardsChosen = [];
 let cardsWonArr = [];
-
+let lives=document.querySelector("h2");
+let counter=5;
+lives.innerHTML=`lives: ${counter}`;
 //insert emoji to the cards
 
 // cardsArray.sort(() => 0.5 - Math.rendom());
@@ -54,8 +56,10 @@ function check(arr) {
       back[0].style.background='rgb(171,220,77)';
         cardsWonArr.push(arr[0],arr[1]);
       }else{
+        arr[0].classList.inner
         arr[0].classList.toggle("flipped");
-        arr[1].classList.toggle("flipped")
+        arr[1].classList.toggle("flipped");
+        counter--;
       }
       cardsChosen=[];
       }
@@ -64,10 +68,3 @@ function check(arr) {
 
 //cards Won
 
-wonCards(cardsWonArr)
-function wonCards(arr){
-  for(let items of arr){
-    back[items]=document.getElementsByClassName(arr[items].lastElementChild.classList[1]);
-      console.log(back)
-  }
-}
