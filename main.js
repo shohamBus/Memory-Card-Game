@@ -28,12 +28,10 @@ let cardsChosen = [];
 let cardsWonArr = [];
 let counter=10;
 let lives=document.querySelector("h2 span");
-// lives.innerText=counter;
+lives.textContent=counter;
 
 // if (counter===0){
-  //   alert("Game over lets try again")
-  //   displayFront()
-  // }
+  
   // updateCounter(counter)
 
   //randomize the array
@@ -50,7 +48,7 @@ let lives=document.querySelector("h2 span");
       back[i].innerHTML = cardsArray[i];
     }
   }
-  displayFront();
+
   
   //flip card
   
@@ -58,18 +56,15 @@ let lives=document.querySelector("h2 span");
     card.addEventListener("click", flipCard);
   }
 
-  console.log(counter);
-
-  function flipCard(counter) {
-  this.classList.toggle("flipped");
-  cardsChosen.push(this)
-  counter--;
-  if (cardsChosen.length===2){
-    setTimeout(function(){check(cardsChosen)},500)
-  }
-  return counter
+  console.log(counter)
+  
+  function flipCard() {
+    this.classList.toggle("flipped");
+    cardsChosen.push(this)
+    if (cardsChosen.length===2){
+      setTimeout(function(){check(cardsChosen)},500)
+    }
 }
-
 //check if match
 
 function check(arr) {
@@ -79,18 +74,30 @@ function check(arr) {
     back=document.getElementsByClassName(arr[1].lastElementChild.classList[1])
     back[0].style.background='rgb(171,220,77)';
     cardsWonArr.push(arr[0],arr[1]);
-    // cardsWon(cardsWonArr);
+
+
+//     cardsWonArr.forEach(element => {
+//       element.style.button=disable;
+//     });
+
+    // no match flip again one less live
+    
   }else{
     arr.forEach(element => {
       element.classList.toggle("flipped")
     });
+    counter--;
+    lives.textContent=counter;
   }
   cardsChosen=[];
-}
 
-// function cardsWon(arr){
-//   for (const item of arr){
-//    item = document.getElementsByClassName('inner');
-//     item.remove();
-//     }
-//   }
+    // if the live's end-refresh the game
+
+  if (counter===0){
+  alert("Game over lets try again")
+  document.location.reload(true)
+  }else if(cardsWonArr.length===20){
+    alert("Congratulations! You managed to finish the game")
+    document.location.reload(true)
+  }
+}
