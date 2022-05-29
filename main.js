@@ -30,10 +30,6 @@ let counter=10;
 let lives=document.querySelector("h2 span");
 lives.textContent=counter;
 
-// if (counter===0){
-  
-  // updateCounter(counter)
-
   //randomize the array
   
   shuffleArray(cardsArray)
@@ -48,15 +44,13 @@ lives.textContent=counter;
       back[i].innerHTML = cardsArray[i];
     }
   }
-
+  displayFront();
   
   //flip card
   
   for(const card of cards){
     card.addEventListener("click", flipCard);
   }
-
-  console.log(counter)
   
   function flipCard() {
     this.classList.toggle("flipped");
@@ -65,21 +59,22 @@ lives.textContent=counter;
       setTimeout(function(){check(cardsChosen)},500)
     }
 }
+
 //check if match
 
 function check(arr) {
   if(arr[0].lastElementChild.innerText===arr[1].lastElementChild.innerText){
     let back=document.getElementsByClassName(arr[0].lastElementChild.classList[1])
-    back[0].style.background='rgb(171,220,77)';
+    back[0].classList.add('foundCard');
     back=document.getElementsByClassName(arr[1].lastElementChild.classList[1])
-    back[0].style.background='rgb(171,220,77)';
+    back[0].classList.add('foundCard');
     cardsWonArr.push(arr[0],arr[1]);
-
-
-//     cardsWonArr.forEach(element => {
-//       element.style.button=disable;
-//     });
-
+   
+    cardsWonArr.forEach(element => {  
+      element.style.pointerEvents = 'none';
+      console.log(element)
+    });
+    
     // no match flip again one less live
     
   }else{
