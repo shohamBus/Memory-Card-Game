@@ -77,6 +77,7 @@ function flipCard() {
   }
   this.classList.toggle("flipped");
   cardsChosen.push(this);
+  this.style.pointerEvents = "none"
   if (cardsChosen.length === 2) {
     setTimeout(function () {
       check(cardsChosen);
@@ -106,6 +107,7 @@ function check(arr) {
   } else {
     arr.forEach((element) => {
       element.classList.toggle("flipped");
+      element.style.pointerEvents = "all"
     });
     counter--;
     lives.textContent = counter;
@@ -126,11 +128,12 @@ function check(arr) {
 //new game
 
 function newGame() {
+  clearInterval(myInterval);
+  myInterval=null;
   time = 60;
   timer.textContent = time;
   counter = 10;
   lives.textContent = counter;
-  clearInterval(myInterval);
   shuffleArray();
   displayFront();
 }
